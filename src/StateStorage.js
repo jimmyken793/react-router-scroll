@@ -3,14 +3,22 @@ const STATE_KEY_PREFIX = '@@scroll|';
 export default class SessionStorage {
   read(location, key) {
     const stateKey = this.getStateKey(location, key);
-    const value = sessionStorage.getItem(stateKey);
-    return JSON.parse(value);
+
+    try {
+      const value = sessionStorage.getItem(stateKey);
+      return JSON.parse(value);
+    } catch (e) {
+      return {};
+    }
   }
 
   save(location, key, value) {
     const stateKey = this.getStateKey(location, key);
     const storedValue = JSON.stringify(value);
-    sessionStorage.setItem(stateKey, storedValue);
+
+    try {
+      sessionStorage.setItem(stateKey, storedValue);
+    } catch (e) { }
   }
 
   getStateKey(location, key) {
