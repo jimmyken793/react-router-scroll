@@ -10,6 +10,7 @@ const propTypes = {
   children: PropTypes.element.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  scrollBehavior: PropTypes.func,
 };
 
 const childContextTypes = {
@@ -22,7 +23,8 @@ class ScrollContext extends React.Component {
 
     const { history } = props;
 
-    this.scrollBehavior = new ScrollBehavior({
+    let ScrollBehaviorConstructor = this.props.scrollBehavior || ScrollBehavior;
+    this.scrollBehavior = new ScrollBehaviorConstructor({
       addTransitionHook: history.listen,
       stateStorage: new SessionStorage(),
       getCurrentLocation: () => this.props.location,
