@@ -36,6 +36,14 @@ $ yarn add react-router-scroll-4
 
 Use the `ScrollContext` wrapper as in the example above. `ScrollContext` Should always have only one child, same as all the `Router` components.
 
+You can override [scroll-behavior] by sending custom costructor through the property `scrollBehavior` to `ScrollContext`:
+
+```js
+<ScrollContext scrollBehavior={newScrollBehavior}>
+  <MyApp />
+</ ScrollContext>
+```
+
 ### Custom scroll behavior
 
 You can provide a custom `shouldUpdateScroll` as a property of `ScrollContext`. This function is called with the previous and the current router props. Those properties correspond to those accessible through [withRouter](https://reacttraining.com/react-router/web/api/withRouter).
